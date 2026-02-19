@@ -10,7 +10,7 @@ O painel fornece indicadores de produtividade dos aprovadores de ordens de servi
 
 **Usuários:** coordenadores, supervisores, aprovadores e analistas de operações.
 
-`mermaid
+```mermaid
 %%{init: {'theme': 'dark'}}%%
 flowchart LR
   A[Aprovador recebe OS] --> B{Tipo de manutenção}
@@ -20,7 +20,7 @@ flowchart LR
   C --> D[Aplica fatores de correção]
   D --> E[Produtividade = peso_os / dia útil]
   E --> F[Dashboard Power BI]
-`
+```
 
 ---
 
@@ -35,18 +35,18 @@ flowchart LR
 | **Conexão** | Databricks.Query | Host: `adb-7941093640821140.0.azuredatabricks.net` |
 | **Visualização** | Power BI Report | Páginas de visão geral, detalhes e auditoria |
 
-`mermaid
+```mermaid
 %%{init: {'theme': 'dark'}}%%
 flowchart TD
-  subgraph Databricks[" Azure Databricks"]
+  subgraph Databricks["Azure Databricks"]
     G[gold.fact_maintenanceservices]
     H[gold.dim_maintenance*]
     I[gold.dim_dates]
     J[bronze.tlbagda..._historico]
     K[gold.Dim_MaintenanceParameterLogValue]
   end
-  subgraph PowerBI[" Power BI"]
-    L["Azure()  Databricks.Query"]
+  subgraph PowerBI["Power BI"]
+    L["Azure - Databricks.Query"]
     M[M Transform Steps]
     N[Modelo Tabular]
     O[Dashboard]
@@ -59,7 +59,7 @@ flowchart TD
   L --> M
   M --> N
   N --> O
-`
+```
 
 ---
 
@@ -67,7 +67,7 @@ flowchart TD
 
 A tabela principal é **FactAprovacao**, carregada por uma query SQL complexa com múltiplas CTEs. Relacionamentos com dimensões de calendário, aprovadores, supervisores, coordenadores e metas.
 
-`mermaid
+```mermaid
 %%{init: {'theme': 'dark'}}%%
 erDiagram
   FactAprovacao ||--o{ DimCalendario : "data_aprovacao"
@@ -77,7 +77,7 @@ erDiagram
   FactAprovacao ||--o{ dim_metas : "CustomerId"
   FactAprovacao ||--o{ FactAuditoria : "OrderServiceCode"
   FactAprovacao ||--o{ glosas : "OrderServiceCode"
-`
+```
 
 ---
 
@@ -110,23 +110,23 @@ erDiagram
 
 > As demais medidas estão no arquivo `_Medidas.tmdl` do modelo semântico.
 
-`mermaid
+```mermaid
 %%{init: {'theme': 'dark'}}%%
 flowchart TD
-  A[Tipo Manutenção + Faixa Qtde Itens] --> B[tempo_padrao]
-  C[Interações revisão/cotação] --> D[tempo_extra_interacao]
-  E[Cliente mercado público] --> F[tempo_extra_mercadopublico]
-  G[Família modelo + Valor OS] --> H["_monta  fator_correcao_monta"]
-  I[Preço parceiro] --> J["fator_correcao_precoparceiro (1.0 ou 1.1)"]
-  B --> K["meta_os_dia = 7.48h*60 / (tempo_padrao + extras)"]
+  A[Tipo Manutencao + Faixa Qtde Itens] --> B[tempo_padrao]
+  C[Interacoes revisao/cotacao] --> D[tempo_extra_interacao]
+  E[Cliente mercado publico] --> F[tempo_extra_mercadopublico]
+  G["Familia modelo + Valor OS"] --> H["_monta / fator_correcao_monta"]
+  I[Preco parceiro] --> J["fator_correcao_precoparceiro 1.0 ou 1.1"]
+  B --> K["meta_os_dia = 7.48h x 60 / tempo_padrao + extras"]
   D --> K
   F --> K
-  K --> L["meta_corrigida = meta / (fator_monta  fator_preco)"]
+  K --> L["meta_corrigida = meta / fator_monta x fator_preco"]
   H --> L
   J --> L
   L --> M["peso_os = 1 / meta_corrigida"]
-  M --> N["produtividade = Σ peso_os / dias_úteis"]
-`
+  M --> N["produtividade = soma peso_os / dias_uteis"]
+```
 
 ---
 
@@ -137,14 +137,14 @@ A query está disponível em dois formatos:
 | Arquivo | Descrição |
 |---------|-----------|
 | `FactAprovacao.sql` | Versão original com `CREATE TABLE` no schema `dev_matheus_bertoti` |
-| `FactAprovacao_DirectQuery.sql` | **Versão atual**  query self-contained sem dependência de schema dev |
+| `FactAprovacao_DirectQuery.sql` | **Versão atual** - query self-contained sem dependência de schema dev |
 
 ### Estrutura das CTEs
 
-`mermaid
+```mermaid
 %%{init: {'theme': 'dark'}}%%
 flowchart TD
-  subgraph "Bloco 1: Preço Parceiro"
+  subgraph bloco1["Bloco 1: Preco Parceiro"]
     P1[pi_logs] --> P2[pi_sets]
     P2 --> P3[pi_adds]
     P2 --> P4[pi_removes]
@@ -153,18 +153,18 @@ flowchart TD
     P5 --> P6[pi_ordered]
     P6 --> P7[param_intervals]
   end
-  subgraph "Bloco 2: Query Principal"
+  subgraph bloco2["Bloco 2: Query Principal"]
     Q1[CTE_BASE] --> Q2[CTE_FLAG]
     P7 --> Q2
     Q2 --> Q3[CTE_CALC]
-    Q3 --> Q4[CTE2 - dias úteis]
-    Q3 --> Q5[CTE3 - aderência]
-    Q5 --> Q6[CTE4 - totais]
+    Q3 --> Q4["CTE2 - dias uteis"]
+    Q3 --> Q5["CTE3 - aderencia"]
+    Q5 --> Q6["CTE4 - totais"]
     Q3 --> Q7[SELECT FINAL]
     Q4 --> Q7
     Q6 --> Q7
   end
-`
+```
 
 ---
 
@@ -177,21 +177,21 @@ flowchart TD
 | 2026-02-19 | Atualizada partition source no TMDL para usar query direta |
 | 2026-02-19 | Versionamento inicial no GitHub |
 
-`mermaid
+```mermaid
 %%{init: {'theme': 'dark'}}%%
 flowchart LR
-  subgraph Antes[" Antes"]
-    A1["Databricks: CREATE TABLE<br/>dev_matheus_bertoti.produtividadeoperacao"]
-    A2["Power BI: SELECT *<br/>FROM dev_matheus_bertoti..."]
+  subgraph antes["Antes"]
+    A1["Databricks: CREATE TABLE dev_matheus_bertoti.produtividadeoperacao"]
+    A2["Power BI: SELECT * FROM dev_matheus_bertoti..."]
     A1 --> A2
   end
-  subgraph Depois[" Depois"]
-    B1["Power BI: WITH ... SELECT<br/>(query completa inline)"]
-    B2["Databricks executa<br/>sob demanda"]
+  subgraph depois["Depois"]
+    B1["Power BI: WITH ... SELECT query completa inline"]
+    B2["Databricks executa sob demanda"]
     B1 --> B2
   end
-  Antes -.->|migração| Depois
-`
+  antes -.->|migracao| depois
+```
 
 ---
 
