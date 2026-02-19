@@ -1,0 +1,39 @@
+table dim_metas
+	lineageTag: 22a93edb-7fbd-4216-be18-c3d9f6084c1c
+
+	column 'Cód. Cliente'
+		dataType: string
+		lineageTag: 5bb71651-6789-47c0-abcb-52d72ba49721
+		summarizeBy: none
+		sourceColumn: Cód. Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'SLA (h)'
+		dataType: double
+		lineageTag: ceea59a0-28b9-4a87-9fc2-9b7605d3a3cb
+		summarizeBy: sum
+		sourceColumn: SLA (h)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_metas = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://edenred-my.sharepoint.com/personal/lucas_malessa_edenred_com/Documents/Power BI - Produtividade Aprovação\dim_carteiras.xlsx"), null, true),
+				    carteiras_Sheet = Fonte{[Item="carteiras",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(carteiras_Sheet, [PromoteAllScalars=true]),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Cabeçalhos Promovidos",{"Cód. Cliente", "SLA (h)"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Outras Colunas Removidas",{{"Cód. Cliente", type text}, {"SLA (h)", type number}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each ([Cód. Cliente] <> null)),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Linhas Filtradas",null,4,Replacer.ReplaceValue,{"SLA (h)"})
+				in
+				    #"Valor Substituído"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

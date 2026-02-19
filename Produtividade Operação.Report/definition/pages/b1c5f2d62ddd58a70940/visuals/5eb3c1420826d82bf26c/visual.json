@@ -1,0 +1,1358 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "5eb3c1420826d82bf26c",
+  "position": {
+    "x": 507.59469332820612,
+    "y": 383.92616804460681,
+    "z": 5000,
+    "height": 321.16900596039227,
+    "width": 978.27340895981547,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_coordenadores"
+                    }
+                  },
+                  "Property": "Coordenador"
+                }
+              },
+              "queryRef": "dim_coordenadores.Coordenador",
+              "nativeQueryRef": "Coordenador"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_supervisores"
+                    }
+                  },
+                  "Property": "Supervisor"
+                }
+              },
+              "queryRef": "dim_supervisores.Supervisor",
+              "nativeQueryRef": "Supervisor"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "_aprovador"
+                }
+              },
+              "queryRef": "FactAprovacao._aprovador",
+              "nativeQueryRef": "Aprovador",
+              "displayName": "Aprovador"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "CustomerId"
+                }
+              },
+              "queryRef": "FactAprovacao.CustomerId",
+              "nativeQueryRef": "Cliente",
+              "displayName": "Cliente"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "data_aprovacao"
+                }
+              },
+              "queryRef": "FactAprovacao.data_aprovacao",
+              "nativeQueryRef": "Data",
+              "displayName": "Data"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "OrderServiceCode"
+                }
+              },
+              "queryRef": "FactAprovacao.OrderServiceCode",
+              "nativeQueryRef": "OS",
+              "displayName": "OS"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "_tipo_manutencao"
+                }
+              },
+              "queryRef": "FactAprovacao._tipo_manutencao",
+              "nativeQueryRef": "Tipo",
+              "displayName": "Tipo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "familia_do_modelo"
+                }
+              },
+              "queryRef": "FactAprovacao.familia_do_modelo",
+              "nativeQueryRef": "Família",
+              "displayName": "Família"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "_monta"
+                }
+              },
+              "queryRef": "FactAprovacao._monta",
+              "nativeQueryRef": "Monta",
+              "displayName": "Monta"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "_faixa_qtde_itens"
+                }
+              },
+              "queryRef": "FactAprovacao._faixa_qtde_itens",
+              "nativeQueryRef": "Itens",
+              "displayName": "Itens"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "valor_orcado"
+                }
+              },
+              "queryRef": "Sum(FactAprovacao.valor_orcado)",
+              "nativeQueryRef": "Orçado",
+              "displayName": "Orçado"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "total_int_rev"
+                }
+              },
+              "queryRef": "Sum(FactAprovacao.total_int_rev)",
+              "nativeQueryRef": "Revisões",
+              "displayName": "Revisões"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "total_int_cot"
+                }
+              },
+              "queryRef": "Sum(FactAprovacao.total_int_cot)",
+              "nativeQueryRef": "Cotações",
+              "displayName": "Cotações"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "peso_os"
+                }
+              },
+              "queryRef": "Sum(FactAprovacao.peso_os)",
+              "nativeQueryRef": "Peso",
+              "displayName": "Peso"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "Tempo Estimado Aprovação"
+                }
+              },
+              "queryRef": "Sum(FactAprovacao.Tempo Estimado Aprovação)",
+              "nativeQueryRef": "Tempo Estimado Aprovação (h)",
+              "displayName": "Tempo Estimado Aprovação (h)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "_data_sla1"
+                }
+              },
+              "queryRef": "FactAprovacao._data_sla1",
+              "nativeQueryRef": "Data 1 envio / alçada anterior",
+              "displayName": "Data 1 envio / alçada anterior"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "_data_sla2"
+                }
+              },
+              "queryRef": "FactAprovacao._data_sla2",
+              "nativeQueryRef": "Data aprovação",
+              "displayName": "Data aprovação"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "sla_aprovocao"
+                }
+              },
+              "queryRef": "FactAprovacao.sla_aprovocao",
+              "nativeQueryRef": "SLA Aprovação (h)",
+              "displayName": "SLA Aprovação (h)"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "IsExternalApproval"
+                }
+              },
+              "queryRef": "FactAprovacao.IsExternalApproval",
+              "nativeQueryRef": "Aprovação Externa",
+              "displayName": "Aprovação Externa"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "OS_Aprovada"
+                }
+              },
+              "queryRef": "FactAprovacao.OS_Aprovada",
+              "nativeQueryRef": "OS Aprovada",
+              "displayName": "OS Aprovada"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAprovacao"
+                    }
+                  },
+                  "Property": "preco_parceiro"
+                }
+              },
+              "queryRef": "FactAprovacao.preco_parceiro",
+              "nativeQueryRef": "Preço Parceiro",
+              "displayName": "Preço Parceiro"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "FactAprovacao"
+                  }
+                },
+                "Property": "data_aprovacao"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "77.76217773547282D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.OrderServiceCode"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "78.76643929058663D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._tipo_manutencao"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "88.04880852585877D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.data_aprovacao"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "95.77104766561465D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.valor_orcado)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "61.96666074399522D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._faixa_qtde_itens"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "113.59845927962616D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._aprovador"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "104.50497975320751D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._monta"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "64.75604182183336D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.total_int_rev)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "108.72292782295577D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.sla_aprovocao"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "176.08494683817293D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._data_sla2"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "137.859412890949D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._data_sla1"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "50.9984277600704D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.peso_os)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "106.00000084147732D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.familia_do_modelo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "118D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.Tempo Estimado Aprovação)"
+          }
+        }
+      ],
+      "columnFormatting": [
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_coordenadores.Coordenador"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_supervisores.Supervisor"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._aprovador"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.data_aprovacao"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.OrderServiceCode"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._tipo_manutencao"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.familia_do_modelo"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._monta"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._faixa_qtde_itens"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.valor_orcado)"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.total_int_rev)"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.total_int_cot)"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.peso_os)"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Sum(FactAprovacao.Tempo Estimado Aprovação)"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._data_sla1"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao._data_sla2"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.sla_aprovocao"
+          }
+        },
+        {
+          "properties": {
+            "styleHeader": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "styleTotal": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Center'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "FactAprovacao.IsExternalApproval"
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "1cd0e7175135a72bdf3d",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_coordenadores"
+              }
+            },
+            "Property": "Coordenador"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "a1a09edfd739031e2653",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dim_supervisores"
+              }
+            },
+            "Property": "Supervisor"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2b714ba12856e6eb7e77",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "_aprovador"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b528028121fd023c4266",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "CustomerId"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ff1cb402e27b0a46b6bc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "data_aprovacao"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "f7d3ee4676b8dea4e313",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "OrderServiceCode"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "96efd14b23a7ed489928",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "_tipo_manutencao"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b8ac9dc5b62a8d51ca52",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "familia_do_modelo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "9a2e35b8743abdede918",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "_monta"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "86c614c3336c19e1b2ab",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "_faixa_qtde_itens"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "c7b13277c7247365d5a2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "valor_orcado"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "a9b1ecf4243eb00d3f97",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "total_int_rev"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "930a115520b8da897242",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "total_int_cot"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "214d0652903b89a7a357",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "peso_os"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "34197cc43b2b742d1478",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "Tempo Estimado Aprovação"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "5109e8e4bfe075d7f5e4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "_data_sla1"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "ee9033da58bc8e112b02",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "_data_sla2"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "081cc4f9e55e38a049b7",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "IsExternalApproval"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "6388a670786a969e16c2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "sla_aprovocao"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "cfabdc2183adf26e63a1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "OS_Aprovada"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "266c46622b851bf27f57",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAprovacao"
+              }
+            },
+            "Property": "preco_parceiro"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

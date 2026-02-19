@@ -1,0 +1,7 @@
+role Supervisores
+	modelPermission: read
+
+	tablePermission dim_supervisores = dim_supervisores[E-mail] == USERNAME()
+
+	annotation PBI_Id = b1aea4d008ae40bb9d724ad0a9074993
+

@@ -1,0 +1,205 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 106.32230737503316,
+        "y": 126.57417544646806
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 2623.0341996246489,
+            "y": 417.54628741306141
+          },
+          "nodeIndex": "_Medidas",
+          "nodeLineageTag": "8cf96042-2fcd-4972-af59-a5456ffc7231",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 644.944606417708,
+            "y": 344.95049361535905
+          },
+          "nodeIndex": "FactAprovacao",
+          "nodeLineageTag": "9400547a-0c9b-4a52-9697-4756e9620a48",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 7,
+          "expandedHeight": 300
+        },
+        {
+          "location": {
+            "x": 144.26405140706913,
+            "y": 7.2061355149043891
+          },
+          "nodeIndex": "DimCalendario",
+          "nodeLineageTag": "8c4dacc2-a4f7-45fb-a73e-3f25b4e1a667",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 767.47625322618478,
+            "y": 769.7578996014488
+          },
+          "nodeIndex": "FactAuditoria",
+          "nodeLineageTag": "7bdc053f-e747-404d-91c2-1891799c2982",
+          "size": {
+            "height": 376,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 2287.2422893482671,
+            "y": 250.56278954127504
+          },
+          "nodeIndex": "ListaAprovadoresSabado",
+          "nodeLineageTag": "260d4a35-94ac-420b-b20c-39072fd8823f",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2602.6810094347506,
+            "y": 255.05403526791554
+          },
+          "nodeIndex": "ListaCodigoClientes",
+          "nodeLineageTag": "36086bf4-27f9-4c19-9f70-d352ab05f9fa",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 1076.4168008615861,
+            "y": 71.458787126805461
+          },
+          "nodeIndex": "TabelaProdutividade",
+          "nodeLineageTag": "480bd379-9a12-4cba-8701-3df06385a3e3",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 2017.6249613298232,
+            "y": 16.947977569095428
+          },
+          "nodeIndex": "Parâmetro Gráfico Produtividade",
+          "nodeLineageTag": "1e70c813-fbae-4b30-a769-602e64f74fe2",
+          "size": {
+            "height": 176,
+            "width": 254.21060576988202
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 2324.0811899630266,
+            "y": 19.965486115814542
+          },
+          "nodeIndex": "Parâmetro Mensal / Semanal",
+          "nodeLineageTag": "e2af26db-80aa-4695-a08c-d4650cac3336",
+          "size": {
+            "height": 152,
+            "width": 207.052525640157
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1033.3570710472763,
+            "y": 391.36549256646867
+          },
+          "nodeIndex": "dim_aprovadores",
+          "nodeLineageTag": "cfdaf843-5b40-4f63-a296-c951a6343fba",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1728.8210778085036,
+            "y": 405.24473381645282
+          },
+          "nodeIndex": "dim_coordenadores",
+          "nodeLineageTag": "f06c1445-2322-4c0e-8d9b-aad06526336e",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1380.4545422861493,
+            "y": 379.17104742849415
+          },
+          "nodeIndex": "dim_supervisores",
+          "nodeLineageTag": "0f9259ca-1107-401e-97b2-94aaa14e34e4",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 2632.7830414595492,
+            "y": 38.702354705775178
+          },
+          "nodeIndex": "dim_metas",
+          "nodeLineageTag": "22a93edb-7fbd-4216-be18-c3d9f6084c1c",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 329.48908222369437,
+            "y": 587.3953268837621
+          },
+          "nodeIndex": "glosas",
+          "nodeLineageTag": "6b22914e-50a9-45e3-9ac0-c94e7ad8bee7",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 79.005057427605323,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

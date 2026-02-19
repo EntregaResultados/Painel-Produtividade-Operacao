@@ -1,0 +1,104 @@
+relationship 2feb9306-8a50-4271-ad8e-8420fab6c4ee
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimCalendario.ReferenceDate
+	toColumn: LocalDateTable_5ae18375-be28-454e-8ca9-053cd7d22b34.Date
+
+relationship 2d8e861b-6d6b-4d9b-98c8-e68e874ec866
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimCalendario.OneDayLess
+	toColumn: LocalDateTable_88a4e1cb-016b-42f9-a344-bf1ffdf269e7.Date
+
+relationship 2ba96adf-3b8e-4c56-9c4a-f67858fad819
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimCalendario.OneMonthLess
+	toColumn: LocalDateTable_03e51a72-50b2-4d64-a826-a63fef610fc2.Date
+
+relationship 111bfd33-50b7-4130-bf67-e1f7470ed4f3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimCalendario.StartOfMonth
+	toColumn: LocalDateTable_f893945b-95fb-4424-b362-7684299e2a4d.Date
+
+relationship 7b35ebf6-bfbb-4247-b25d-608195b5ce5f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimCalendario.EndOfMonth
+	toColumn: LocalDateTable_c6d3dbf9-1e59-4a7a-b3ec-698dcf944c98.Date
+
+relationship 7d512d08-d40a-4aa8-ba8c-511295d49939
+	joinOnDateBehavior: datePartOnly
+	fromColumn: DimCalendario.FirstDateOfWeek
+	toColumn: LocalDateTable_c3ca523e-3a8b-4fe5-8191-3fecb2ae2bf0.Date
+
+relationship 1586c556-bba1-c79d-4be9-880be84b0c00
+	fromColumn: FactAprovacao.data_aprovacao
+	toColumn: DimCalendario.ReferenceDate
+
+relationship 7221068d-edc9-4469-a496-d827082a408d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactAprovacao._data_sla1
+	toColumn: LocalDateTable_8c0957e4-68f4-44b5-9cd7-1ff1789ff0e0.Date
+
+relationship 4ea1cd20-46a2-43d4-8b85-c7d235e03d06
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactAprovacao._data_sla2
+	toColumn: LocalDateTable_c7085e68-dc3a-437c-87f0-d258848a2011.Date
+
+relationship 2eefd488-f72d-7d16-633d-180da1932f09
+	fromColumn: TabelaProdutividade.data_aprovacao
+	toColumn: DimCalendario.ReferenceDate
+
+relationship 1ed9b112-7d89-4d96-beea-03d566d61914
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_aprovadores.'Data Admissão'
+	toColumn: LocalDateTable_424fee13-8e6b-44b7-9210-5e00338b06bf.Date
+
+relationship 45a25522-3cc0-4326-b381-be68a33df8e3
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_aprovadores.'Data Desligamento'
+	toColumn: LocalDateTable_448e5437-d507-4f5a-bcde-e19710c93670.Date
+
+relationship ec0a8547-1bb8-64b4-abcd-30905c998042
+	fromColumn: FactAprovacao._aprovador
+	toColumn: dim_aprovadores.dUsuario
+
+relationship 7ea06b7d-86b4-7ad5-86a9-27b00c22a81e
+	fromColumn: TabelaProdutividade._aprovador
+	toColumn: dim_aprovadores.dUsuario
+
+relationship AutoDetected_5037f58d-2001-4eb0-baa6-a81e7dc04356
+	fromColumn: dim_aprovadores.Supervisor
+	toColumn: dim_supervisores.Supervisor
+
+relationship AutoDetected_8fcb98c8-3589-43bc-967c-7a3934182ebf
+	fromColumn: dim_supervisores.Coordenador
+	toColumn: dim_coordenadores.Coordenador
+
+relationship c1ef6a36-ecd9-4de8-a4fe-5c43ef204c34
+	joinOnDateBehavior: datePartOnly
+	fromColumn: glosas.'Mês Competência IMR'
+	toColumn: LocalDateTable_71358638-64c6-4258-a771-2b3347a58fe7.Date
+
+relationship 0402dec4-102e-4fe0-9bca-e19a7870e431
+	joinOnDateBehavior: datePartOnly
+	fromColumn: glosas.'Data envio Email Orientação'
+	toColumn: LocalDateTable_a289d439-2d73-4703-bac0-a73d60342fca.Date
+
+relationship d681b055-db51-2acb-b1f1-c88816ec763c
+	fromColumn: glosas.OS
+	toColumn: FactAprovacao.OrderServiceCode
+
+relationship 49454561-863f-b0e8-6adb-0cb803f0e941
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: FactAuditoria.'NÚMERO DA ORDEM DE SERVIÇO'
+	toColumn: FactAprovacao.OrderServiceCode
+
+relationship fece0098-41d3-4ee9-940c-ef4664b5947d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactAuditoria.'DATA AUDITORIA'
+	toColumn: LocalDateTable_e3115d90-6e9a-4e93-ac54-9155d5e1d7ef.Date
+
+relationship 868f5b62-58fb-497d-b433-d92763fb7aaa
+	joinOnDateBehavior: datePartOnly
+	fromColumn: FactAuditoria.'Data de aprovação'
+	toColumn: LocalDateTable_ef5fe050-75c5-46bc-9d24-cd2b698e4cd0.Date
+

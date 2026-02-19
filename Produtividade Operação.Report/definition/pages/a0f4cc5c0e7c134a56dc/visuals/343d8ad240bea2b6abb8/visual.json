@@ -1,0 +1,220 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.2.0/schema.json",
+  "name": "343d8ad240bea2b6abb8",
+  "position": {
+    "x": 11.271188513563095,
+    "y": 120.60171709512512,
+    "z": 6000,
+    "height": 599.62722892155671,
+    "width": 1464.127387911846,
+    "tabOrder": 6001
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dim_supervisores"
+                    }
+                  },
+                  "Property": "Supervisor"
+                }
+              },
+              "queryRef": "dim_supervisores.Supervisor",
+              "nativeQueryRef": "Supervisor"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAuditoria"
+                    }
+                  },
+                  "Property": " NOME DO APROVADOR"
+                }
+              },
+              "queryRef": "FactAuditoria. NOME DO APROVADOR",
+              "nativeQueryRef": " NOME DO APROVADOR1"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAuditoria"
+                    }
+                  },
+                  "Property": "NÚMERO DA ORDEM DE SERVIÇO"
+                }
+              },
+              "queryRef": "Sum(FactAuditoria.NÚMERO DA ORDEM DE SERVIÇO)",
+              "nativeQueryRef": "NÚMERO DA ORDEM DE SERVIÇO1"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "FactAuditoria"
+                    }
+                  },
+                  "Property": "CONCLUSÃO"
+                }
+              },
+              "queryRef": "FactAuditoria.CONCLUSÃO",
+              "nativeQueryRef": "CONCLUSÃO"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "ThemeDataColor": {
+                      "ColorId": 2,
+                      "Percent": 0
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "stylePreset": [
+        {
+          "properties": {
+            "name": {
+              "expr": {
+                "Literal": {
+                  "Value": "'AlternatingRowsNew'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "dbc40258ab387a840109",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAuditoria"
+              }
+            },
+            "Property": " NOME DO APROVADOR"
+          }
+        },
+        "type": "Categorical",
+        "isLockedInViewMode": true
+      },
+      {
+        "name": "6de5770b5ef58153d502",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "FactAuditoria"
+              }
+            },
+            "Property": "CONCLUSÃO"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "f",
+              "Entity": "FactAuditoria",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Not": {
+                  "Expression": {
+                    "In": {
+                      "Expressions": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Source": "f"
+                              }
+                            },
+                            "Property": "CONCLUSÃO"
+                          }
+                        }
+                      ],
+                      "Values": [
+                        [
+                          {
+                            "Literal": {
+                              "Value": "null"
+                            }
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "isLockedInViewMode": true,
+        "objects": {
+          "general": [
+            {
+              "properties": {
+                "isInvertedSelectionMode": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "true"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

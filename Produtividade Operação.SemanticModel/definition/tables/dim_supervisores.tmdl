@@ -1,0 +1,47 @@
+table dim_supervisores
+	lineageTag: 0f9259ca-1107-401e-97b2-94aaa14e34e4
+
+	column Supervisor
+		dataType: string
+		lineageTag: dbcb717c-13da-4b72-9be2-7994d67f0f63
+		summarizeBy: none
+		sourceColumn: Supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column E-mail
+		dataType: string
+		lineageTag: fff6d573-54d9-46f3-8c4b-196db8479787
+		summarizeBy: none
+		sourceColumn: E-mail
+
+		annotation SummarizationSetBy = Automatic
+
+	column Coordenador
+		dataType: string
+		lineageTag: bec43b51-f057-44db-9805-3d59195c7f7e
+		summarizeBy: none
+		sourceColumn: Coordenador
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_supervisores = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://edenred-my.sharepoint.com/personal/lucas_malessa_edenred_com/Documents/Power BI - Produtividade Aprovação\dim_carteiras.xlsx"), null, true),
+				    Aprovadores_Sheet = Fonte{[Item="Supervisores",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Aprovadores_Sheet, [PromoteAllScalars=true]),
+				    #"Texto Aparado" = Table.TransformColumns(#"Cabeçalhos Promovidos",{{"Supervisor", Text.Trim, type text}, {"Coordenador", Text.Trim, type text}, {"E-mail", Text.Trim, type text}}),
+				    #"Texto Limpo" = Table.TransformColumns(#"Texto Aparado",{{"Supervisor", Text.Clean, type text}, {"Coordenador", Text.Clean, type text}, {"E-mail", Text.Clean, type text}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Texto Limpo", each ([Supervisor] <> null)),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Linhas Filtradas", {"Supervisor"}),
+				    #"Texto Aparado1" = Table.TransformColumns(#"Duplicatas Removidas",{{"Coordenador", Text.Trim, type text}}),
+				    #"Texto Limpo1" = Table.TransformColumns(#"Texto Aparado1",{{"Coordenador", Text.Clean, type text}})
+				in
+				    #"Texto Limpo1"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,108 @@
+table glosas
+	lineageTag: 6b22914e-50a9-45e3-9ac0-c94e7ad8bee7
+
+	column OS
+		dataType: string
+		lineageTag: 9f292c4e-374d-46eb-af10-5dee23dd7d30
+		summarizeBy: none
+		sourceColumn: OS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Mês Competência IMR'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d229426d-981e-4cd6-b7b5-9d882ca75a20
+		summarizeBy: none
+		sourceColumn: Mês Competência IMR
+
+		variation Variation
+			isDefault
+			relationship: c1ef6a36-ecd9-4de8-a4fe-5c43ef204c34
+			defaultHierarchy: LocalDateTable_71358638-64c6-4258-a771-2b3347a58fe7.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Glosa
+		dataType: decimal
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: beb04b61-e327-4085-bce0-60b670a05dca
+		summarizeBy: sum
+		sourceColumn: Glosa
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	column Vistoriador
+		dataType: string
+		lineageTag: e9e5b869-4831-45d4-8004-a3ce66b4cd0d
+		summarizeBy: none
+		sourceColumn: Vistoriador
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data envio Email Orientação'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 0beaff80-5e40-4b67-bc1e-70e51306d04b
+		summarizeBy: none
+		sourceColumn: Data envio Email Orientação
+
+		variation Variation
+			isDefault
+			relationship: 0402dec4-102e-4fe0-9bca-e19a7870e431
+			defaultHierarchy: LocalDateTable_a289d439-2d73-4703-bac0-a73d60342fca.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Usuario
+		dataType: string
+		lineageTag: d90e8cdf-8c4c-4d48-907a-790f4baf47b1
+		summarizeBy: none
+		sourceColumn: Usuario
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: 11f08402-227a-40ce-a40a-58d08e9931ee
+		summarizeBy: none
+		sourceColumn: Email
+
+		annotation SummarizationSetBy = Automatic
+
+	partition glosas = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://edenred-my.sharepoint.com/personal/leonardo_vieira_edenred_com/Documents/Mapeamento%20de%20Erros.xlsx"), null, true),
+				    Plan1_Sheet = Fonte{[Item="Plan1",Kind="Sheet"]}[Data],
+				    #"Linhas Superiores Removidas" = Table.Skip(Plan1_Sheet,2),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(#"Linhas Superiores Removidas", [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"OS", type text}}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Tipo Alterado", each ([OS] <> null)),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Linhas Filtradas",{"Placa", "Base IMR", "Item", "Descrição do Erro"}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Colunas Removidas",{{"Glosa", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado1","R$","",Replacer.ReplaceText,{"Glosa"}),
+				    #"Texto Aparado" = Table.TransformColumns(#"Valor Substituído",{{"Glosa", Text.Trim, type text}}),
+				    #"Texto Limpo" = Table.TransformColumns(#"Texto Aparado",{{"Glosa", Text.Clean, type text}}),
+				    #"Linhas Filtradas1" = Table.SelectRows(#"Texto Limpo", each ([OS] <> "OS")),
+				    #"Tipo Alterado2" = Table.TransformColumnTypes(#"Linhas Filtradas1",{{"Glosa", Currency.Type}, {"Mês Competência IMR", type date}, {"Vistoriador", type text}, {"Data envio Email Orientação", type date}}),
+				    #"Texto Aparado1" = Table.TransformColumns(#"Tipo Alterado2",{{"Vistoriador", Text.Trim, type text}}),
+				    #"Texto Limpo1" = Table.TransformColumns(#"Texto Aparado1",{{"Vistoriador", Text.Clean, type text}}),
+				    #"Linhas Filtradas2" = Table.SelectRows(#"Texto Limpo1", each ([Usuario] <> null and [Usuario] <> "n/a")),
+				    #"Tipo Alterado3" = Table.TransformColumnTypes(#"Linhas Filtradas2",{{"Usuario", type text}, {"Email", type text}}),
+				    #"Texto Aparado2" = Table.TransformColumns(#"Tipo Alterado3",{{"Email", Text.Trim, type text}, {"Usuario", Text.Trim, type text}}),
+				    #"Texto Limpo2" = Table.TransformColumns(#"Texto Aparado2",{{"Email", Text.Clean, type text}, {"Usuario", Text.Clean, type text}})
+				in
+				    #"Texto Limpo2"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,654 @@
+table _Medidas
+	lineageTag: 8cf96042-2fcd-4972-af59-a5456ffc7231
+
+	measure 'Total Dias Uteis Trabalhados' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(DimCalendario[ReferenceDate]),
+			    FILTER(
+			        FactAprovacao,
+			        FactAprovacao[data_aprovacao] <> BLANK()
+			    ),
+			    FILTER(
+			        DimCalendario,
+			        DimCalendario[IsWeekDay] = TRUE()
+			    )
+			)
+			
+			```
+		formatString: #,0
+		displayFolder: _Aprovacao
+		lineageTag: e177f6a0-43b6-49d5-90c1-407089c1c1be
+
+	measure 'Total OS Reguladas' = ```
+			
+			DISTINCTCOUNT('FactAprovacao'[OrderServiceCode])
+			
+			```
+		formatString: #,0
+		displayFolder: _Aprovacao
+		lineageTag: 54bf2ecb-3891-4ce7-8305-1ec0421be225
+
+	measure 'Total Aprovadores Dias Uteis Trabalhados' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FactAprovacao[_aprovador]),
+			    FILTER(
+			        FactAprovacao,
+			        FactAprovacao[data_aprovacao] <> BLANK()
+			    ),
+			    FILTER(
+			        DimCalendario,
+			        DimCalendario[IsWeekDay] = TRUE()
+			    )
+			)
+		formatString: #,0
+		displayFolder: _Aprovacao
+		lineageTag: 71be9e6f-1945-4dfd-9f52-9ee059b3a7bf
+
+	measure 'Total Interacao Revisao' =
+			
+			SUM(FactAprovacao[total_int_rev])
+		formatString: #,0
+		displayFolder: _Aprovacao
+		lineageTag: 5b4ac55f-9592-416a-9fb0-826121a32a07
+
+	measure 'Total Soma Peso OS' =
+			
+			SUM(FactAprovacao[peso_os])
+		formatString: #,0.0
+		displayFolder: _Aprovacao
+		lineageTag: fe984816-46b6-413a-adf7-4c1682b6668e
+
+	measure 'Produtividade Dias Uteis Trabalhados' =
+			
+			AVERAGE(TabelaProdutividade[produtividade_semana_aprovador])
+		formatString: 0%;-0%;0%
+		displayFolder: _Aprovacao
+		lineageTag: fe828e9b-4014-447d-a0cc-4f9b0d397e4b
+
+	measure 'Total Valor Aprovado' =
+			
+			SUM(FactAprovacao[_valor_aprovado])
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		displayFolder: _Aprovacao
+		lineageTag: 28115653-e82f-4287-bb1e-8ff12b6c27a6
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total Valor Orcado' =
+			
+			SUM(FactAprovacao[valor_orcado])
+		formatString: "R$"\ #,0.00;-"R$"\ #,0.00;"R$"\ #,0.00
+		displayFolder: _Aprovacao
+		lineageTag: 07b39987-4ddc-4787-96d4-45425c5717d0
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure Reducao = ```
+			
+			CALCULATE(
+			    (DIVIDE( ([Total Valor Orcado] - [Total Valor Aprovado] ),[Total Valor Orcado])),
+			    FILTER(
+			        FactAprovacao,
+			        (FactAprovacao[StatusTypeDescription] IN {
+			            "Aprovadas E Nao Iniciadas"
+			            ,
+			            "Iniciadas"
+			            ,
+			            "Concluidas E Nao Cobradas"
+			            ,
+			            "Cobradas"
+			            }) &&
+			        (FactAprovacao[OS_Aprovada] = TRUE())
+			        
+			    )
+			)
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: _Aprovacao
+		lineageTag: 9f9e1e96-a70a-4819-ad26-56267807b9dc
+
+	measure 'Total OS Com Interacao' =
+			
+			CALCULATE(
+			    [Total OS Reguladas],
+			    FILTER(
+			        FactAprovacao,
+			        (FactAprovacao[total_int_rev] + FactAprovacao[total_int_cot]) > 0
+			    )
+			)
+		formatString: #,0
+		displayFolder: _Aprovacao
+		lineageTag: 019b4b53-2233-496f-8aa6-b447f8a1c25e
+
+	measure 'Media Interacao Por OS Com Interacao' =
+			
+			CALCULATE(
+			    DIVIDE(
+			        ([Total Interacao Revisao]+[Total Interacao Cotacao]),
+			        [Total OS Com Interacao]
+			    ),
+			    FactAprovacao[OS_Aprovada] = TRUE()
+			)
+		formatString: 0.0
+		displayFolder: _Aprovacao
+		lineageTag: 0c41eb54-07b8-48ee-8a4c-5308a394d81b
+
+	measure 'Media OS Reguladas Por Dia Util Trabalhado' =
+			
+			AVERAGE(TabelaProdutividade[media_diaria_os_aprovador])
+		formatString: 0
+		displayFolder: _Aprovacao
+		lineageTag: 84033155-053d-45dd-bcfa-17f2a31f2f41
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'Percentual OS Com Interacao' =
+			
+			CALCULATE(
+			    DIVIDE([Total OS Com Interacao],[Total OS Reguladas]),
+			    FactAprovacao[OS_Aprovada] = TRUE()
+			    )
+		formatString: 0%;-0%;0%
+		displayFolder: _Aprovacao
+		lineageTag: 324f7165-9532-4524-a35f-123c0757dcb2
+
+	measure 'Ticket Medio Cotacao Dias Uteis Trabalhados' =
+			
+			DIVIDE([Total Valor Orcado] , [Total OS Reguladas] )
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		displayFolder: _Aprovacao
+		lineageTag: 1a2d7804-71c9-4cb4-a074-965c34922b63
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total OS Aprovadas Dentro SLA' =
+			
+			CALCULATE(
+			    [Total OS Reguladas],
+			    FactAprovacao[Dentro SLA] = TRUE()
+			)
+		formatString: 0
+		displayFolder: _Aprovacao
+		lineageTag: 55600215-3b95-4208-bef5-3e5999da3e2f
+
+	measure 'Percentual SLA' =
+			
+			CALCULATE(
+			    DIVIDE([Total OS Aprovadas Dentro SLA], [Total OS Reguladas]),
+			    FactAprovacao[OS_Aprovada] = TRUE()
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: _Aprovacao
+		lineageTag: 77d6e89d-7e43-4e1a-9819-b78dab438147
+
+	measure 'Total OS Auditadas' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(FactAuditoria[NÚMERO DA ORDEM DE SERVIÇO]),
+			    FactAuditoria[DATA AUDITORIA] <> BLANK()
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: ce056e58-0390-423a-a4b6-03ac1282fd13
+
+	measure 'Tipo Manutencao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[TIPO DE MANUTENÇÃO ] = "Conforme"
+			    )
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: cd6dfde6-b4ba-4906-88a5-86a22452be72
+
+	measure 'Tipo Manutencao Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[TIPO DE MANUTENÇÃO ] = "Não Conforme"
+			    )
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: a2f20e93-082b-45ca-81bc-a6df25722407
+
+	measure 'Fotos Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[FOTOS] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: b7ee25f0-41e0-426b-b2b0-c818ae55734a
+
+	measure 'Fotos Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[FOTOS] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: dc9967b8-ffb8-4a61-8ff0-49d986a0f7cc
+
+	measure 'Garantia Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[GARANTIA] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: afeb7340-24a3-44bd-973e-79becbf9e558
+
+	measure 'Garantia Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[GARANTIA] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: fffe9bbc-7931-4ac9-b6be-65b062e6589b
+
+	measure 'Hodometro Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[HODÔMETRO] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 58ac7962-5758-4724-a2ae-63b434a8f637
+
+	measure 'Hodometro Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[HODÔMETRO] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 1a308767-13dd-4d34-b1f4-6b8fdb3e3763
+
+	measure 'Interacoes Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[INTERAÇÕES ] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: f862b376-8012-4578-a1a7-09bdda8b0519
+
+	measure 'Interacoes Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[INTERAÇÕES ] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 82755739-2ae9-4fac-b705-3bc04d146aab
+
+	measure 'MDO Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[MDO] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: f7407c84-2446-4fa5-99a7-8d92606b06a4
+
+	measure 'MDO Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[MDO] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: c40ebbd9-e1b2-4653-a1c2-a25f7ee20ee6
+
+	measure 'MTBF Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[MTBF] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: e105c52f-c55d-436f-a7b3-0448cc01b86d
+
+	measure 'MTBF Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[MTBF] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: e7f3ccb2-e246-46e4-b73d-14bfadea08a5
+
+	measure 'Peca/complemento Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[Peca/complemento] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 55af65fd-9c84-4340-8a5f-892b76876b9d
+
+	measure 'Possivel Fraude Sim' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[POSSIVEL FRAUDE ] = "Sim"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 41b4398a-8dad-4a7f-88a5-dadc016f1531
+
+	measure 'Possivel Fraude Nao' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[POSSIVEL FRAUDE ] = "Não"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 183273a0-f1c0-459b-83c5-53c04f5bdd13
+
+	measure 'Preco MDO Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[PREÇO MDO] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: a6f28434-a1f4-4889-b0a6-d2aabd75aa62
+
+	measure 'Preco MDO Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[PREÇO MDO] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: d24e5884-b175-4fb3-9ca4-6bbe5708b8db
+
+	measure 'Peca/complemento Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[Peca/complemento] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: b2d297c7-97e1-491c-a717-6ab77e46ef67
+
+	measure 'Preco Peca Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[PREÇO PEÇA] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 9c1a8f19-51f9-494f-984c-3fb4bbf3df51
+
+	measure 'Preco Peca Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[PREÇO PEÇA] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: c5562308-29e7-41b4-8358-d6c618e8a1e0
+
+	measure 'Relato Justificativa Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[RELATO JUSTIFICATIVA] = "Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 5b99e915-4470-4b93-b9b8-2d5ce9189c61
+
+	measure 'Relato Justificativa Nao Conforme' =
+			
+			CALCULATE(
+			    [Total OS Auditadas],
+			    FactAuditoria,
+			    FactAuditoria[RELATO JUSTIFICATIVA] = "Não Conforme"
+			)
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 4fb59bbb-34a6-4e23-b761-1e1e15aee3fe
+
+	measure 'Total Sabados Trabalhados' = ```
+			
+			CALCULATE(
+			    DISTINCTCOUNT(DimCalendario[ReferenceDate]),
+			    FILTER(
+			        DimCalendario,
+			        DimCalendario[IsWeekDay] = FALSE()
+			    ),
+			    FILTER(
+			        FactAprovacao,
+			        FactAprovacao[data_aprovacao] <> BLANK()
+			    )
+			)
+			        
+			
+			```
+		formatString: 0
+		lineageTag: 6e25c223-0e83-49a9-86e3-e519d114cb40
+
+	measure '_Total Conforme' = ```
+			
+			[Tipo Manutencao Conforme] + 
+			[Fotos Conforme] + 
+			[Garantia Conforme] + 
+			[Hodometro Conforme] + 
+			[Interacoes Conforme] + 
+			[MDO Conforme] + 
+			[MTBF Conforme] + 
+			[Peca/complemento Conforme] + 
+			[Preco MDO Conforme] + 
+			[Preco Peca Conforme] +
+			[Relato Justificativa Conforme]
+			```
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 30df4bb6-4982-457d-b866-1aea9d442988
+
+	measure '_Total Nao Conforme' = ```
+			
+			[Tipo Manutencao Nao Conforme] + 
+			[Fotos Nao Conforme] + 
+			[Garantia Nao Conforme] + 
+			[Hodometro Nao Conforme] + 
+			[Interacoes Nao Conforme] + 
+			[MDO Nao Conforme] + 
+			[MTBF Nao Conforme] + 
+			[Peca/complemento Nao Conforme] + 
+			[Preco MDO Nao Conforme] + 
+			[Preco Peca Nao Conforme] +
+			[Relato Justificativa Nao Conforme]
+			```
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: 761babd5-56a3-49be-9546-f515a344134a
+
+	measure '_Total Itens Validos' =
+			
+			[_Total Conforme] + [_Total Nao Conforme]
+		formatString: #,0
+		displayFolder: _Auditoria
+		lineageTag: cfbc67b4-7911-4866-8fea-28ead40c66e4
+
+	measure '_Percentual Nao Conforme' =
+			
+			DIVIDE([_Total Nao Conforme],[_Total Itens Validos])
+		formatString: 0%;-0%;0%
+		displayFolder: _Auditoria
+		lineageTag: 4163dc68-aa5a-4e34-8855-238d6bc53a91
+
+	measure 'Total Interacao Cotacao' =
+			
+			SUM(FactAprovacao[total_int_cot])
+		formatString: 0
+		lineageTag: f1ad2ada-f030-40fc-9540-c427f32c41ce
+
+	measure 'Percentual SLA Sem Aprovação Externa' =
+			
+			CALCULATE(
+			    [Percentual SLA],
+			    FactAprovacao[IsExternalApproval] = FALSE() &&
+			    FactAprovacao[OS_Aprovada] = TRUE()
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: _Aprovacao
+		lineageTag: 603f6884-37da-44c9-8376-7dea8da8dcef
+
+	measure 'Total OS Com Revisao' =
+			
+			CALCULATE(
+			    [Total OS Reguladas],
+			    FILTER(
+			        FactAprovacao,
+			        FactAprovacao[total_int_rev] > 0
+			    )
+			)
+		formatString: 0
+		displayFolder: _Aprovacao
+		lineageTag: e63ff63f-6da4-4cc0-9509-1a87e86cb613
+
+	measure 'Total OS Com Cotacao' =
+			
+			CALCULATE(
+			    [Total OS Reguladas],
+			    FILTER(
+			        FactAprovacao,
+			        FactAprovacao[total_int_cot] > 0
+			    )
+			)
+		formatString: 0
+		displayFolder: _Aprovacao
+		lineageTag: 54a2c30b-119b-4b98-a1b7-f72487bf278c
+
+	measure 'Percentual OS Com Cotacao' =
+			
+			CALCULATE(
+			    DIVIDE([Total OS Com Cotacao],[Total OS Reguladas]),
+			    FactAprovacao[OS_Aprovada] = TRUE()
+			)
+		formatString: 0%;-0%;0%
+		displayFolder: _Aprovacao
+		lineageTag: 77cf2d19-5158-407e-bfef-7e8cb0f1bb0f
+
+	measure 'Percentual OS Com Revisao' =
+			
+			CALCULATE(
+			    DIVIDE([Total OS Com Revisao],[Total OS Reguladas]),
+			    FactAprovacao[OS_Aprovada] = TRUE()
+			)
+		formatString: 0%;-0%;0%
+		displayFolder: _Aprovacao
+		lineageTag: e1e1eed0-7cab-4094-a237-b590787a0cd6
+
+	measure 'Total Valor Glosa' = SUM(glosas[Glosa])
+		formatString: "R$"\ #,0;-"R$"\ #,0;"R$"\ #,0
+		lineageTag: 0cc3f0fb-2ed2-4bc5-8874-776cd942379d
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total OS Glosa' = DISTINCTCOUNT(glosas[OS])
+		formatString: 0
+		lineageTag: 0ca62a66-8eb1-4066-8bae-fbc4513402e2
+
+	measure 'Colaborador Em Treinamento' = ```
+			
+			IF(
+			    ISINSCOPE('dim_aprovadores'[dUsuario]),
+			    SELECTEDVALUE('dim_aprovadores'[Em Treinamento?]),
+			    BLANK()
+			)
+			
+			```
+		lineageTag: 6ace78d7-614c-40aa-974b-5e0b3dcb5e1b
+
+	measure '_Total OS Auditada' =
+			
+			DISTINCTCOUNT(FactAuditoria[NÚMERO DA ORDEM DE SERVIÇO])
+		formatString: 0
+		displayFolder: _Auditoria
+		lineageTag: cdcf4bcf-2d6d-4be8-81ec-77667eaec54b
+
+	measure 'Total Valor Refencial Aprovado' =
+			
+			SUM(FactAprovacao[total_aprovado_referencial])
+		formatString: "R$"\ #,0.###############;-"R$"\ #,0.###############;"R$"\ #,0.###############
+		lineageTag: c61b4e60-d8af-48dd-92ca-3203dcd3982f
+
+		annotation PBI_FormatHint = {"currencyCulture":"pt-BR"}
+
+	measure 'Total Valor Refencial Aderente' =
+			
+			SUM(FactAprovacao[total_aprovado_aderente])
+		formatString: 0
+		lineageTag: 36de8966-66ef-435a-bb3e-e4bff9cc434e
+
+	measure 'Percentual Aderencia Referencial' =
+			
+			DIVIDE([Total Valor Refencial Aderente],[Total Valor Refencial Aprovado])
+		formatString: 0.0%;-0.0%;0.0%
+		displayFolder: _Auditoria
+		lineageTag: e3940b35-3a07-4c53-b017-64039763c0a6
+
+	partition _Medidas = m
+		mode: import
+		source =
+				let
+				    Fonte = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [#"Coluna 1" = _t]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(Fonte,{{"Coluna 1", type text}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Tipo Alterado",{"Coluna 1"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

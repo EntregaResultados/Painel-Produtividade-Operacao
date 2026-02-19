@@ -1,0 +1,74 @@
+table TabelaProdutividade
+	lineageTag: 480bd379-9a12-4cba-8701-3df06385a3e3
+
+	column YearWeek
+		formatString: 0
+		lineageTag: e9d7966b-1c4b-4c41-9d07-e37f1864ca1e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: FactAprovacao[YearWeek]
+
+		annotation SummarizationSetBy = Automatic
+
+	column _aprovador
+		lineageTag: f8f91a67-13e1-4011-a10c-8e3fcafbccbd
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FactAprovacao[_aprovador]
+
+		annotation SummarizationSetBy = Automatic
+
+	column produtividade_semana_aprovador
+		lineageTag: 5fa9fd86-7a31-453c-9c9d-521ed7b747ee
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: FactAprovacao[produtividade_semana_aprovador]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column data_aprovacao
+		formatString: General Date
+		lineageTag: a548e348-140c-4b71-b8e3-537c94a2c30d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: FactAprovacao[data_aprovacao]
+
+		annotation SummarizationSetBy = Automatic
+
+	column media_diaria_os_aprovador
+		lineageTag: 3568ebd7-50ca-4731-84bb-778c2d74df6e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: FactAprovacao[media_diaria_os_aprovador]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_dias_uteis_semana
+		formatString: 0
+		lineageTag: 6622d27b-3338-4655-88f1-684a95828a99
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: FactAprovacao[total_dias_uteis_semana]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition TabelaProdutividade = calculated
+		mode: import
+		source =
+				
+				SUMMARIZECOLUMNS(
+				    FactAprovacao[YearWeek]
+				    , FactAprovacao[_aprovador]
+				    , FactAprovacao[produtividade_semana_aprovador]
+				    , FactAprovacao[media_diaria_os_aprovador]
+				    , FactAprovacao[data_aprovacao]
+				    , FactAprovacao[total_dias_uteis_semana]
+				
+				)
+
+	annotation PBI_Id = caeed365213641249267511abbd3d936
+

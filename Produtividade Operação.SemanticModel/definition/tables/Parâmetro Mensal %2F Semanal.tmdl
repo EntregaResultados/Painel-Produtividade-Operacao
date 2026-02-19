@@ -1,0 +1,48 @@
+table 'Parâmetro Mensal / Semanal'
+	lineageTag: e2af26db-80aa-4695-a08c-d4650cac3336
+
+	column Parâmetro
+		lineageTag: 830c4abe-6174-47c0-9b6e-add6c9b9fc4b
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 8f9cfd56-0c9f-414a-94e3-2cb21d286474
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 9ec366fd-3458-4138-9052-69e91a23e1f7
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro Mensal / Semanal' = calculated
+		mode: import
+		source =
+				{
+				    ("Mensal", NAMEOF('DimCalendario'[ReferenceDate].[Mês]), 0),
+				    ("Semanal", NAMEOF('DimCalendario'[YearWeek]), 1)
+				}
+
+	annotation PBI_Id = 272e72e73cb546abaa2f983ca6309999
+

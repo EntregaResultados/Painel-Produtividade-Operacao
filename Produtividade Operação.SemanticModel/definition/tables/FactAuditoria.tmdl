@@ -1,0 +1,302 @@
+table FactAuditoria
+	lineageTag: 7bdc053f-e747-404d-91c2-1891799c2982
+
+	column 'NÚMERO DA ORDEM DE SERVIÇO'
+		dataType: string
+		lineageTag: 833ada1f-5512-40bd-bdad-ee4b4678c9d1
+		summarizeBy: none
+		sourceColumn: NÚMERO DA ORDEM DE SERVIÇO
+
+		annotation SummarizationSetBy = Automatic
+
+	column ' NOME DO APROVADOR'
+		dataType: string
+		lineageTag: a23f70d7-aeb2-441a-941f-a135eb1519ff
+		summarizeBy: none
+		sourceColumn: " NOME DO APROVADOR"
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data de aprovação'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f43e8d81-0cdc-4464-8c94-873ef714e47e
+		summarizeBy: none
+		sourceColumn: Data de aprovação
+
+		variation Variation
+			isDefault
+			relationship: 868f5b62-58fb-497d-b433-d92763fb7aaa
+			defaultHierarchy: LocalDateTable_ef5fe050-75c5-46bc-9d24-cd2b698e4cd0.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Cód. Cliente'
+		dataType: string
+		lineageTag: 04becb4d-a81f-465d-b7e1-defacfe24b97
+		summarizeBy: none
+		sourceColumn: Cód. Cliente
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'DATA AUDITORIA'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 22d21d3f-292a-431e-ac56-d376980030f2
+		summarizeBy: none
+		sourceColumn: DATA AUDITORIA
+
+		variation Variation
+			isDefault
+			relationship: fece0098-41d3-4ee9-940c-ef4664b5947d
+			defaultHierarchy: LocalDateTable_e3115d90-6e9a-4e93-ac54-9155d5e1d7ef.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Horario inicio'
+		dataType: string
+		lineageTag: 692cbb53-26d4-4cdd-9118-ff570dc87516
+		summarizeBy: none
+		sourceColumn: Horario inicio
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'TIPO DE MANUTENÇÃO '
+		dataType: string
+		lineageTag: 2c6d2724-7550-4a59-9ee8-3a6ffdbafa04
+		summarizeBy: none
+		sourceColumn: "TIPO DE MANUTENÇÃO "
+
+		annotation SummarizationSetBy = Automatic
+
+	column HODÔMETRO
+		dataType: string
+		lineageTag: 7aae432f-44c5-4f9a-bf64-de89b27bced7
+		summarizeBy: none
+		sourceColumn: HODÔMETRO
+
+		annotation SummarizationSetBy = Automatic
+
+	column PEÇA
+		dataType: string
+		lineageTag: 38245444-82a7-4344-afd0-337fa70cd52f
+		summarizeBy: none
+		sourceColumn: PEÇA
+
+		annotation SummarizationSetBy = Automatic
+
+	column COMPLEMENTO
+		dataType: string
+		lineageTag: 34fa292a-ed54-43f6-94e9-6474c6cc7b4e
+		summarizeBy: none
+		sourceColumn: COMPLEMENTO
+
+		annotation SummarizationSetBy = Automatic
+
+	column MDO
+		dataType: string
+		lineageTag: 209a6e19-48dd-4505-a819-056afe74dd93
+		summarizeBy: none
+		sourceColumn: MDO
+
+		annotation SummarizationSetBy = Automatic
+
+	column GARANTIA
+		dataType: string
+		lineageTag: d03764c5-2f54-46b5-9aca-0e47fe839350
+		summarizeBy: none
+		sourceColumn: GARANTIA
+
+		annotation SummarizationSetBy = Automatic
+
+	column MTBF
+		dataType: string
+		lineageTag: c7e3ea35-6ace-4ad5-a002-c50d3b7d6b0b
+		summarizeBy: none
+		sourceColumn: MTBF
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PREÇO PEÇA'
+		dataType: string
+		lineageTag: de6b4b3f-9204-4a77-8a13-1b8cf1799790
+		summarizeBy: none
+		sourceColumn: PREÇO PEÇA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'PREÇO MDO'
+		dataType: string
+		lineageTag: cf4d0348-fcbe-4715-acf9-985d9d81fc45
+		summarizeBy: none
+		sourceColumn: PREÇO MDO
+
+		annotation SummarizationSetBy = Automatic
+
+	column FOTOS
+		dataType: string
+		lineageTag: 6224e99a-1290-4fb8-a9a2-dec93e77704b
+		summarizeBy: none
+		sourceColumn: FOTOS
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'RELATO JUSTIFICATIVA'
+		dataType: string
+		lineageTag: 2fa4de33-63b1-439b-aed3-61291b7087f9
+		summarizeBy: none
+		sourceColumn: RELATO JUSTIFICATIVA
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'INTERAÇÕES '
+		dataType: string
+		lineageTag: 315ccf99-00b1-4f3b-a39e-8192558f667c
+		summarizeBy: none
+		sourceColumn: "INTERAÇÕES "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'POLITICA DO CLIENTE'
+		dataType: string
+		lineageTag: 5d9a8fbc-7c00-4e75-8033-c78e3eac805a
+		summarizeBy: none
+		sourceColumn: POLITICA DO CLIENTE
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'POSSIVEL FRAUDE '
+		dataType: string
+		lineageTag: 923b61e0-ce0b-4bc2-98f8-ae13a81a7a87
+		summarizeBy: none
+		sourceColumn: "POSSIVEL FRAUDE "
+
+		annotation SummarizationSetBy = Automatic
+
+	column CONCLUSÃO
+		dataType: string
+		lineageTag: db617ca7-2eb5-46cc-b1d5-a5c11fe9e8fb
+		summarizeBy: none
+		sourceColumn: CONCLUSÃO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referencial MDO'
+		dataType: string
+		lineageTag: 0b418767-0b66-4646-80f8-b595e4fc908d
+		summarizeBy: none
+		sourceColumn: Referencial MDO
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referencial peça'
+		dataType: string
+		lineageTag: 35097ee7-1fc9-4a74-80a7-a445551c90a9
+		summarizeBy: none
+		sourceColumn: Referencial peça
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Hora final'
+		dataType: string
+		lineageTag: 440f7942-bde8-4710-bd44-1bc91a36d45b
+		summarizeBy: none
+		sourceColumn: Hora final
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Nome gestor'
+		dataType: string
+		lineageTag: 4c1773c3-dc0e-4484-87eb-2572ced1d88f
+		summarizeBy: none
+		sourceColumn: Nome gestor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data feedback gestor'
+		dataType: string
+		lineageTag: c6662963-585f-49eb-b3ef-172713c94e0b
+		summarizeBy: none
+		sourceColumn: Data feedback gestor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data envio e-mail'
+		dataType: string
+		lineageTag: 87edb9c8-d9d3-460a-a8cd-c9805571747d
+		summarizeBy: none
+		sourceColumn: Data envio e-mail
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Observações gerais'
+		dataType: string
+		lineageTag: a82e2ca4-7c2a-4ceb-b6ac-e7bc7c555cb8
+		summarizeBy: none
+		sourceColumn: Observações gerais
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Classificação Inconsistência'
+		dataType: string
+		lineageTag: d0a0e091-f55d-48c8-91dc-2d5c066629f5
+		summarizeBy: none
+		sourceColumn: Classificação Inconsistência
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Avaliação de justificativa '
+		dataType: string
+		lineageTag: 3aee1339-0c18-42cf-93bd-e42ab0b0ffbf
+		summarizeBy: none
+		sourceColumn: "Avaliação de justificativa "
+
+		annotation SummarizationSetBy = Automatic
+
+	column Peca/complemento = ```
+			
+			SWITCH(
+			    TRUE(),
+			    FactAuditoria[PEÇA] = "Conforme" && FactAuditoria[COMPLEMENTO] = "Conforme", "Conforme",
+			    FactAuditoria[PEÇA] = "Conforme" && FactAuditoria[COMPLEMENTO] = "Não conforme", "Não conforme",
+			    FactAuditoria[PEÇA] = "Não conforme" && FactAuditoria[COMPLEMENTO] = "Não conforme", "Não conforme",
+			    FactAuditoria[PEÇA] = "Não aplicavel" && FactAuditoria[COMPLEMENTO] = "Não aplicavel", "Não aplicavel",
+			    FactAuditoria[PEÇA] = "Conforme" && FactAuditoria[COMPLEMENTO] = "Não aplicavel", "Conforme",
+			    FactAuditoria[PEÇA] = "Não conforme" && FactAuditoria[COMPLEMENTO] = "Não aplicavel", "Não conforme",
+			    FactAuditoria[PEÇA] = "Não conforme" && FactAuditoria[COMPLEMENTO] = "Conforme", "Não conforme",
+			    FactAuditoria[PEÇA] = "Não aplicavel" && FactAuditoria[COMPLEMENTO] = "Conforme", "Não aplicavel",
+			    FactAuditoria[PEÇA] = "Não aplicavel" && FactAuditoria[COMPLEMENTO] = "Não conforme", "Não aplicavel",
+			    BLANK()
+			)
+			
+			```
+		lineageTag: 6fe5f143-31ff-42cf-9b94-f4627645146a
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactAuditoria = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://edenred-my.sharepoint.com/personal/dieferson_rosa_edenred_com/Documents/Planilha de Auditoria 1.xlsx"), null, true),
+				    Planilha_Sheet = Fonte{[Item="Planilha",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha_Sheet, [PromoteAllScalars=true]),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Cabeçalhos Promovidos", each ([NÚMERO DA ORDEM DE SERVIÇO] <> null)),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Linhas Filtradas", {"Nome gestor"}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Erros Removidos",{{"NÚMERO DA ORDEM DE SERVIÇO", type text}, {" NOME DO APROVADOR", type text}, {"Data de aprovação", type date}, {"Cód. Cliente", type text}, {"DATA AUDITORIA", type date}, {"Horario inicio", type any}, {"TIPO DE MANUTENÇÃO ", type text}, {"HODÔMETRO", type text}, {"PEÇA", type text}, {"COMPLEMENTO ", type text}, {"MDO", type text}, {"GARANTIA", type text}, {"MTBF", type text}, {"PREÇO PEÇA", type text}, {"PREÇO MDO", type text}, {"FOTOS", type text}, {"RELATO JUSTIFICATIVA", type text}, {"INTERAÇÕES ", type text}, {"POLITICA DO CLIENTE", type any}, {"POSSIVEL FRAUDE ", type text}, {"CONCLUSÃO", type text}, {"Referencial MDO", type text}, {"Referencial peça", type text}, {"Hora final", type any}, {"Nome gestor", type text}, {"Data feedback gestor", type any}, {"Data envio e-mail", type any}, {"Observações gerais", type text}}),
+				    #"Valor Substituído" = Table.ReplaceValue(#"Tipo Alterado","Lgodinho","Legodinho",Replacer.ReplaceText,{" NOME DO APROVADOR"}),
+				    #"Texto Aparado" = Table.TransformColumns(Table.TransformColumnTypes(#"Valor Substituído", {{"POLITICA DO CLIENTE", type text}}, "pt-BR"),{{"TIPO DE MANUTENÇÃO ", Text.Trim, type text}, {"HODÔMETRO", Text.Trim, type text}, {"PEÇA", Text.Trim, type text}, {"COMPLEMENTO ", Text.Trim, type text}, {"MDO", Text.Trim, type text}, {"GARANTIA", Text.Trim, type text}, {"MTBF", Text.Trim, type text}, {"PREÇO PEÇA", Text.Trim, type text}, {"PREÇO MDO", Text.Trim, type text}, {"FOTOS", Text.Trim, type text}, {"RELATO JUSTIFICATIVA", Text.Trim, type text}, {"INTERAÇÕES ", Text.Trim, type text}, {"POSSIVEL FRAUDE ", Text.Trim, type text}}),
+				    #"Texto Limpo" = Table.TransformColumns(#"Texto Aparado",{{"TIPO DE MANUTENÇÃO ", Text.Clean, type text}, {"HODÔMETRO", Text.Clean, type text}, {"PEÇA", Text.Clean, type text}, {"COMPLEMENTO ", Text.Clean, type text}, {"MDO", Text.Clean, type text}, {"GARANTIA", Text.Clean, type text}, {"MTBF", Text.Clean, type text}, {"PREÇO PEÇA", Text.Clean, type text}, {"PREÇO MDO", Text.Clean, type text}, {"FOTOS", Text.Clean, type text}, {"RELATO JUSTIFICATIVA", Text.Clean, type text}, {"INTERAÇÕES ", Text.Clean, type text}, {"POSSIVEL FRAUDE ", Text.Clean, type text}, {"Referencial MDO", Text.Clean, type text}, {"Referencial peça", Text.Clean, type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Texto Limpo",{{"COMPLEMENTO ", "COMPLEMENTO"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,123 @@
+table dim_aprovadores
+	lineageTag: cfdaf843-5b40-4f63-a296-c951a6343fba
+
+	column 'Nome Aprovador'
+		dataType: string
+		lineageTag: 86477763-185f-4065-b55a-70eb09959efa
+		summarizeBy: none
+		sourceColumn: Nome Aprovador
+
+		annotation SummarizationSetBy = Automatic
+
+	column E-mail
+		dataType: string
+		lineageTag: e3848cb0-4bb4-449c-aa56-996176ea8d31
+		summarizeBy: none
+		sourceColumn: E-mail
+
+		annotation SummarizationSetBy = Automatic
+
+	column dUsuario
+		dataType: string
+		lineageTag: 85c75766-f317-4b07-bdc5-25e71b96585a
+		summarizeBy: none
+		sourceColumn: dUsuario
+
+		annotation SummarizationSetBy = Automatic
+
+	column Carteira
+		dataType: string
+		lineageTag: 9bf53426-e577-415f-a0d3-b6a0d9c0d810
+		summarizeBy: none
+		sourceColumn: Carteira
+
+		annotation SummarizationSetBy = Automatic
+
+	column Supervisor
+		dataType: string
+		lineageTag: 17baf431-60e5-4fdc-9591-b8eb0d124a01
+		summarizeBy: none
+		sourceColumn: Supervisor
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Colaborador Terceiro'
+		dataType: string
+		lineageTag: 26b01e06-75b8-485c-8c3d-c7341d41a6c9
+		summarizeBy: none
+		sourceColumn: Colaborador Terceiro
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Data Admissão'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 3e4a74ba-0754-40f5-bae3-ce5323c00f05
+		summarizeBy: none
+		sourceColumn: Data Admissão
+
+		variation Variation
+			isDefault
+			relationship: 1ed9b112-7d89-4d96-beea-03d566d61914
+			defaultHierarchy: LocalDateTable_424fee13-8e6b-44b7-9210-5e00338b06bf.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Data Desligamento'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 5a4d4080-9977-452c-95a9-78ef60145af6
+		summarizeBy: none
+		sourceColumn: Data Desligamento
+
+		variation Variation
+			isDefault
+			relationship: 45a25522-3cc0-4326-b381-be68a33df8e3
+			defaultHierarchy: LocalDateTable_448e5437-d507-4f5a-bcde-e19710c93670.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Sábado
+		dataType: string
+		lineageTag: 15eee970-8f8d-4975-a2cc-76b95352ac35
+		summarizeBy: none
+		sourceColumn: Sábado
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Em Treinamento?'
+		dataType: string
+		lineageTag: 7c52e179-0d32-40c0-8cc8-360a4453d6c1
+		summarizeBy: none
+		sourceColumn: Em Treinamento?
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_aprovadores = m
+		mode: import
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://edenred-my.sharepoint.com/personal/lucas_malessa_edenred_com/Documents/Power BI - Produtividade Aprovação\dim_carteiras.xlsx"), null, true),
+				    Aprovadores_Sheet = Fonte{[Item="Aprovadores",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Aprovadores_Sheet, [PromoteAllScalars=true]),
+				    #"Texto Aparado" = Table.TransformColumns(#"Cabeçalhos Promovidos",{{"Nome Aprovador", Text.Trim, type text}, {"E-mail", Text.Trim, type text}, {"dUsuario", Text.Trim, type text}, {"Carteira", Text.Trim, type text}, {"Supervisor", Text.Trim, type text}, {"Colaborador Terceiro", Text.Trim, type text}, {"Sábado", Text.Trim, type text}}),
+				    #"Texto Limpo" = Table.TransformColumns(#"Texto Aparado",{{"Nome Aprovador", Text.Clean, type text}, {"E-mail", Text.Clean, type text}, {"dUsuario", Text.Clean, type text}, {"Carteira", Text.Clean, type text}, {"Supervisor", Text.Clean, type text}, {"Colaborador Terceiro", Text.Clean, type text}, {"Sábado", Text.Clean, type text}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Texto Limpo",{{"Data Admissão", type date}, {"Data Desligamento", type date}}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Tipo Alterado", {"dUsuario"}),
+				    #"Linhas Filtradas" = Table.SelectRows(#"Duplicatas Removidas", each ([dUsuario] <> null)),
+				    #"Texto Aparado1" = Table.TransformColumns(#"Linhas Filtradas",{{"dUsuario", Text.Trim, type text}}),
+				    #"Texto Limpo1" = Table.TransformColumns(#"Texto Aparado1",{{"dUsuario", Text.Clean, type text}}),
+				    #"Personalização Adicionada" = Table.AddColumn(#"Texto Limpo1", "Personalizar", each if Duration.Days(DateTime.Date(DateTime.LocalNow()) - [Data Admissão]) <= 180 then "Sim" else "Não"),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Personalização Adicionada",{{"Personalizar", type text}}),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Tipo Alterado1",{{"Personalizar", "Em Treinamento?"}})
+				in
+				    #"Colunas Renomeadas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

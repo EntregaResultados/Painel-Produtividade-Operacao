@@ -1,0 +1,35 @@
+table ListaCodigoClientes
+	lineageTag: 36086bf4-27f9-4c19-9f70-d352ab05f9fa
+
+	column ListaCodigoClientes
+		dataType: string
+		lineageTag: 80711867-d509-4182-83dd-d427da71792c
+		summarizeBy: none
+		sourceColumn: ListaCodigoClientes
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ListaCodigoClientes = m
+		mode: import
+		queryGroup: Filtros
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://edenred-my.sharepoint.com/personal/lucas_malessa_edenred_com/Documents/Power BI - Produtividade Aprovação\dim_carteiras.xlsx"), null, true),
+				    carteiras_Sheet = Fonte{[Item="carteiras",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(carteiras_Sheet, [PromoteAllScalars=true]),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Cabeçalhos Promovidos",{"Cód. Cliente"}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Outras Colunas Removidas"),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Duplicatas Removidas",{{"Cód. Cliente", "Cod_Cliente"}}),
+				    // Aqui converte a coluna em lista
+				    ListaCodigosClientes = Table.Column(#"Colunas Renomeadas", "Cod_Cliente"),
+				    // Transforma cada código em texto (caso sejam números)
+				    ListaCodigosTexto = List.Transform(ListaCodigosClientes, each Number.ToText(_)),
+				    // Junta tudo em uma string separada por vírgula
+				    TextoCodigos = Text.Combine(ListaCodigosTexto, ",")
+				in
+				    TextoCodigos
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Text
+

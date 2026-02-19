@@ -1,0 +1,48 @@
+table ListaAprovadoresSabado
+	lineageTag: 260d4a35-94ac-420b-b20c-39072fd8823f
+
+	column ListaAprovadoresSabado
+		dataType: string
+		lineageTag: e2923314-11ce-41cb-9f94-fdc3f7c5b61f
+		summarizeBy: none
+		sourceColumn: ListaAprovadoresSabado
+
+		annotation SummarizationSetBy = Automatic
+
+	partition ListaAprovadoresSabado = m
+		mode: import
+		queryGroup: Filtros
+		source =
+				let
+				    Fonte = Excel.Workbook(Web.Contents("https://edenred-my.sharepoint.com/personal/lucas_malessa_edenred_com/Documents/Power BI - Produtividade Aprovação\dim_carteiras.xlsx"), null, true),
+				    Planilha1_Sheet = Fonte{[Item="metas",Kind="Sheet"]}[Data],
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Planilha1_Sheet, [PromoteAllScalars=true]),
+				    #"Colunas Renomeadas" = Table.RenameColumns(#"Cabeçalhos Promovidos",{{"dUsuario", "Usuário"}}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Colunas Renomeadas",{"Meta_Produtividade", "Meta_Produtividade_Item", "Fila", "dFim"}),
+				    #"Erros Removidos" = Table.RemoveRowsWithErrors(#"Colunas Removidas", {"Nome Aprovador"}),
+				    #"Erros Removidos1" = Table.RemoveRowsWithErrors(#"Erros Removidos", {"Usuário"}),
+				    #"Texto Aparado" = Table.TransformColumns(#"Erros Removidos1",{{"Nome Aprovador", Text.Trim, type text}, {"Usuário", Text.Trim, type text}}),
+				    #"Texto Limpo" = Table.TransformColumns(#"Texto Aparado",{{"Nome Aprovador", Text.Clean, type text}, {"Usuário", Text.Clean, type text}}),
+				    #"Colocar Cada Palavra Em Maiúscula" = Table.TransformColumns(#"Texto Limpo",{{"Nome Aprovador", Text.Proper, type text}, {"Supervisor", Text.Proper, type text}}),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Colocar Cada Palavra Em Maiúscula",{{"Nome Aprovador", type text}, {"Usuário", type text}, {"Carteira", type text}, {"Supervisor", type text}, {"Coordenador", type text}, {"Colaborador Terceiro", type text}, {"Data Admissão", type date}, {"Data Desligamento", type date}, {"dInicio", type date}}),
+				    #"Linhas Classificadas" = Table.Sort(#"Tipo Alterado",{{"dInicio", Order.Descending}}),
+				    Bufferizada = Table.Buffer(#"Linhas Classificadas"),
+				    // Remova duplicatas mantendo o mais recente
+				    DuplicatasRemovidas = Table.Distinct(Bufferizada, {"Usuário"}),
+				    #"Linhas Filtradas" = Table.SelectRows(DuplicatasRemovidas, each ([Usuário] <> null)),
+				    #"Coluna Condicional Adicionada" = Table.AddColumn(#"Linhas Filtradas", "Desligado", each if [Data Desligamento] = null then "Não" else "Sim"),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Coluna Condicional Adicionada",{{"Desligado", type text}}),
+				    #"Linhas Filtradas1" = Table.SelectRows(#"Tipo Alterado1", each ([Sábado] = "Sim")),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Linhas Filtradas1",{"Usuário"}),
+				    #"Coluna Mesclada Inserida" = Table.AddColumn(#"Outras Colunas Removidas", "Mesclado", each Text.Combine({"'", [Usuário], "'"}), type text),
+				    #"Colunas Renomeadas1" = Table.RenameColumns(#"Coluna Mesclada Inserida",{{"Mesclado", "Usuario"}}),
+				    #"Outras Colunas Removidas1" = Table.SelectColumns(#"Colunas Renomeadas1",{"Usuario"}),
+				    LilstaAprovadoresSabado = Table.Column(#"Outras Colunas Removidas1", "Usuario"),
+				    Personalizar1 = Text.Combine(LilstaAprovadoresSabado, ",")
+				in
+				    Personalizar1
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Text
+

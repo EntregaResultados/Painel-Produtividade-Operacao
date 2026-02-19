@@ -1,0 +1,72 @@
+table 'Parâmetro Gráfico Produtividade'
+	lineageTag: 1e70c813-fbae-4b30-a769-602e64f74fe2
+
+	column Parâmetro
+		lineageTag: 5032f3f4-8bd9-42c1-91f1-046ed5ef34b9
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parâmetro Pedido'
+
+		relatedColumnDetails
+			groupByColumn: 'Parâmetro Campos'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Campos'
+		isHidden
+		lineageTag: 9a916d54-6009-484b-b364-280148a13f31
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parâmetro Pedido'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parâmetro Pedido'
+		isHidden
+		formatString: 0
+		lineageTag: 9999c9c4-dd20-46b7-8a21-bd4313e79c2d
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Minimo eixo Y' =
+			
+			SWITCH(TRUE(),
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 0, 0,
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 1, 0,
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 2, 0,
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 3, 0,
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 4, 0,
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 5, 0,
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 6, 1,
+			'Parâmetro Gráfico Produtividade'[Parâmetro Pedido] = 7, 0
+			)
+		formatString: 0
+		lineageTag: 4ff3b7f3-4007-41a8-9209-ed5a4a762a29
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Parâmetro Gráfico Produtividade' = calculated
+		mode: import
+		source =
+				{
+				    ("Produtividade", NAMEOF('_Medidas'[Produtividade Dias Uteis Trabalhados]), 0),
+				    ("Total OS Aprovadas", NAMEOF('_Medidas'[Total OS Reguladas]), 1),
+				    ("Média OS Aprovadas Por Dia Útil", NAMEOF('_Medidas'[Media OS Reguladas Por Dia Util Trabalhado]), 2),
+				    ("SLA Aprovação 4h", NAMEOF('_Medidas'[Percentual SLA]) ,3),
+				    ("Redução", NAMEOF('_Medidas'[Reducao]), 4),
+				    ("Percentual OS Com Interação", NAMEOF(_Medidas[Percentual OS Com Interacao]),5),
+				    ("Média Interação Por OS Com Interação", NAMEOF('_Medidas'[Media Interacao Por OS Com Interacao]), 6),
+				    ("Percentual Aderêncial Referencial Preço Peça", NAMEOF('_Medidas'[Percentual Aderencia Referencial]), 7)
+				}
+
+	annotation PBI_Id = 3540066661874502a84775ad163449da
+

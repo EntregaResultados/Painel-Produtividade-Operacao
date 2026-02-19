@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Produtividade Operação"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "6f0190e4-90cd-4571-84c8-9f2c28416dce"
+  }
+}

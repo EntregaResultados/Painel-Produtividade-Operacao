@@ -1,0 +1,332 @@
+table DimCalendario
+	lineageTag: 8c4dacc2-a4f7-45fb-a73e-3f25b4e1a667
+
+	column Sk_Date
+		dataType: int64
+		formatString: 0
+		lineageTag: 04bbb454-c9ad-4836-8121-0e473aff4626
+		summarizeBy: sum
+		sourceColumn: Sk_Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReferenceDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 94f81a8c-e01b-4e46-8c80-8336d6f76765
+		summarizeBy: none
+		sourceColumn: ReferenceDate
+
+		variation Variation
+			isDefault
+			relationship: 2feb9306-8a50-4271-ad8e-8420fab6c4ee
+			defaultHierarchy: LocalDateTable_5ae18375-be28-454e-8ca9-053cd7d22b34.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OneDayLess
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 4d351648-eb2d-4f6d-b77b-0940f151b479
+		summarizeBy: none
+		sourceColumn: OneDayLess
+
+		variation Variation
+			isDefault
+			relationship: 2d8e861b-6d6b-4d9b-98c8-e68e874ec866
+			defaultHierarchy: LocalDateTable_88a4e1cb-016b-42f9-a344-bf1ffdf269e7.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OneMonthLess
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1f203c09-20ed-4f03-9b7c-e1f2842e016e
+		summarizeBy: none
+		sourceColumn: OneMonthLess
+
+		variation Variation
+			isDefault
+			relationship: 2ba96adf-3b8e-4c56-9c4a-f67858fad819
+			defaultHierarchy: LocalDateTable_03e51a72-50b2-4d64-a826-a63fef610fc2.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column ReferenceYear
+		dataType: int64
+		formatString: 0
+		lineageTag: 221e1668-320b-4bb4-aeb2-4dead971b6ce
+		summarizeBy: sum
+		sourceColumn: ReferenceYear
+
+		annotation SummarizationSetBy = Automatic
+
+	column StartOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 09afa68b-9714-48c5-ba57-4930dde0b5cf
+		summarizeBy: none
+		sourceColumn: StartOfMonth
+
+		variation Variation
+			isDefault
+			relationship: 111bfd33-50b7-4130-bf67-e1f7470ed4f3
+			defaultHierarchy: LocalDateTable_f893945b-95fb-4424-b362-7684299e2a4d.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column EndOfMonth
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c835ea36-5349-4bf2-81bc-d0894a2b8a38
+		summarizeBy: none
+		sourceColumn: EndOfMonth
+
+		variation Variation
+			isDefault
+			relationship: 7b35ebf6-bfbb-4247-b25d-608195b5ce5f
+			defaultHierarchy: LocalDateTable_c6d3dbf9-1e59-4a7a-b3ec-698dcf944c98.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column FirstDateOfWeek
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: f1434fad-9153-4953-91b9-518680c4ea41
+		summarizeBy: none
+		sourceColumn: FirstDateOfWeek
+
+		variation Variation
+			isDefault
+			relationship: 7d512d08-d40a-4aa8-ba8c-511295d49939
+			defaultHierarchy: LocalDateTable_c3ca523e-3a8b-4fe5-8191-3fecb2ae2bf0.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column MonthNameEnStartOfWeek
+		dataType: string
+		lineageTag: 82ba0ec9-4760-482e-b93a-b20a792a033e
+		summarizeBy: none
+		sourceColumn: MonthNameEnStartOfWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: 47e70af8-f9a0-44e7-be4e-0eecf6b3a8e7
+		summarizeBy: sum
+		sourceColumn: YearWeek
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearDay
+		dataType: int64
+		formatString: 0
+		lineageTag: c5e26218-f13c-46c8-823d-fb2d38751424
+		summarizeBy: sum
+		sourceColumn: YearDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearDotMonth
+		dataType: string
+		lineageTag: 46c42b5a-6d3b-4376-a14b-ebad6d2a11b1
+		summarizeBy: none
+		sourceColumn: YearDotMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearDotTrimester
+		dataType: string
+		lineageTag: 785f896f-2f6c-4c61-b63b-4b6ace3f666a
+		summarizeBy: none
+		sourceColumn: YearDotTrimester
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReferenceMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: ebf95d36-bb9c-475c-b873-b55b3b984071
+		summarizeBy: sum
+		sourceColumn: ReferenceMonth
+
+		annotation SummarizationSetBy = Automatic
+
+	column Trimester
+		dataType: string
+		lineageTag: 2b1af47c-c06a-4b06-b4db-5354b61f9faa
+		summarizeBy: none
+		sourceColumn: Trimester
+
+		annotation SummarizationSetBy = Automatic
+
+	column Semester
+		dataType: int64
+		formatString: 0
+		lineageTag: ff97e34f-daf4-4275-88ec-ef8783d650a7
+		summarizeBy: sum
+		sourceColumn: Semester
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNameEn
+		dataType: string
+		lineageTag: 7bcd626c-8167-444d-a46f-054283db87ab
+		summarizeBy: none
+		sourceColumn: MonthNameEn
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNamePt
+		dataType: string
+		lineageTag: 2d1845fe-1f13-417c-bbe3-0be3e1ac055e
+		summarizeBy: none
+		sourceColumn: MonthNamePt
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthNameEs
+		dataType: string
+		lineageTag: 3b30bb97-8e1c-4208-ad8a-d67f4b79aa35
+		summarizeBy: none
+		sourceColumn: MonthNameEs
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthAbbreviationPt
+		dataType: string
+		lineageTag: 117793a7-c10a-464a-8d1d-f0e1f9b322c2
+		summarizeBy: none
+		sourceColumn: MonthAbbreviationPt
+
+		annotation SummarizationSetBy = Automatic
+
+	column SeasonsBr
+		dataType: string
+		lineageTag: 15c1d621-7954-43b3-aaf5-7ee4f04429ef
+		summarizeBy: none
+		sourceColumn: SeasonsBr
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDayNumber
+		dataType: int64
+		formatString: 0
+		lineageTag: a1c680d0-492e-4778-9a55-187132368d54
+		summarizeBy: sum
+		sourceColumn: WeekDayNumber
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDayNameEn
+		dataType: string
+		lineageTag: b874a2d9-03b1-4ed8-bf31-91d873b32ccb
+		summarizeBy: none
+		sourceColumn: WeekDayNameEn
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDayNamePt
+		dataType: string
+		lineageTag: 63e584c1-7893-4c8d-abf3-e361d59253df
+		summarizeBy: none
+		sourceColumn: WeekDayNamePt
+		sortByColumn: WeekDayNumber
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column WeekDayNameEs
+		dataType: string
+		lineageTag: 0fa4f436-bcc9-4c01-b59b-5d50ebcca83c
+		summarizeBy: none
+		sourceColumn: WeekDayNameEs
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWeekDay
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: b4ca9218-cecb-48cf-a865-fa029c80478c
+		summarizeBy: none
+		sourceColumn: IsWeekDay
+
+		annotation SummarizationSetBy = Automatic
+
+	column HolidayOrBridge
+		dataType: string
+		lineageTag: baf07f7b-d6cb-4f43-9513-cfad7cdc128e
+		summarizeBy: none
+		sourceColumn: HolidayOrBridge
+
+		annotation SummarizationSetBy = Automatic
+
+	column HolidayArgentina
+		dataType: string
+		lineageTag: c5b12d1c-15f1-4f35-8e03-9f8a1224e904
+		summarizeBy: none
+		sourceColumn: HolidayArgentina
+
+		annotation SummarizationSetBy = Automatic
+
+	column HolidayMexico
+		dataType: string
+		lineageTag: c70daf40-3b6a-48b8-a651-a026e9cdf469
+		summarizeBy: none
+		sourceColumn: HolidayMexico
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsTodayOrBefore
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 3969e6bc-a091-412b-a658-4e8dd6eff20d
+		summarizeBy: none
+		sourceColumn: IsTodayOrBefore
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsThisMonthOrBefore
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 05a89ea2-e7b5-47d1-8aee-e0b361e80384
+		summarizeBy: none
+		sourceColumn: IsThisMonthOrBefore
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCalendario = m
+		mode: import
+		source = ```
+				let
+				    Fonte = Azure("
+				SELECT * 
+				FROM gold.dim_dates 
+				WHERE 1=1 
+				    AND ReferenceDate >= " & FiltroData &"
+				    AND IsTodayOrBefore = True
+				
+				")
+				in
+				    Fonte
+				```
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navegação
+

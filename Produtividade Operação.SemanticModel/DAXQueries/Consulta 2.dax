@@ -1,0 +1,11 @@
+
+// DEFINE
+// MEASURE _Medidas[Total Valor Glosa] = SUM(glosas[Glosa])
+
+
+
+// EVALUATE
+// SUMMARIZECOLUMNS(
+//     glosas[Categoria],
+//     "Total Vendas", [TotalVendas]
+// )
